@@ -1,0 +1,163 @@
+% Main "look" of your document is determined by the documentclass.
+% The default/standard one is "article".
+% Other options include "paper" and "report".
+% To get the VUB style, you can find instructions at https://gitlab.com/rubdos/texlive-vub 
+\documentclass{article}
+
+% Packages from the AMS, you will basically always need these.
+% Amsmath gives acces to equation and align environments
+% Amssymb loads some handy math symbols and fonts (like mathbb/mathfrak)
+% Amsthm is used for defining theorem environments
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+% Makes links/references in your document clickable.
+\usepackage{hyperref}
+% Babel is to ensure that table of contents, figures, references will get the correct name.
+% \usepackage[dutch]{babel}
+
+% Automatically inserts environment names into references.
+%\usepackage[dutch]{cleveref}
+\usepackage{cleveref}
+
+% Easily change the enumeration type
+% WARNING: doesn't work with beamer!
+\usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section] % You can specify at what depth the counter is reset.
+% The [theorem] indicates that it uses the same numbering counter as theorem.
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{prop*}{Proposition}
+\newtheorem*{corollary*}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{exercise*}{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+
+%% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Information for the title page
+\title{A showcase of \LaTeX}
+\author{Wannes Malfait, Andreas Lorrain}
+% You can set the date to nothing, if you don't want it to appear.
+% \date{}
+
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This document contains a bunch of random \LaTeX{} code to give you an idea of what is
+possible. Let us start with a theorem:
+\begin{theorem}[Pythagoras] % You can give a name between [].
+	\label{thm:pythagoras}
+	In a right-angled triangle with short sides $a$ and $b$ and hypotenuse $c$,
+	the following identity always holds:
+	\begin{equation}\label{eq:pythagoras}
+		a^2 + b^2 = c^2.
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	This follows as a trivial consequence of \cite[Theorem 6.9]{GeissLeclercSchroer2008PFvar}.
+\end{proof}
+
+You can then refer to \Cref{thm:pythagoras} like so, and \cref{eq:pythagoras} like so.
+You can even refer to things before you define them! Look at this beautiful image:
+\cref{fig:meme}.
+\begin{figure}
+	\centering
+
+	\includegraphics[width=0.7\columnwidth, trim={2mm 2mm 2mm 2mm},clip]{meme.png}
+
+	\caption{A very accurate meme.}
+	\label{fig:meme}
+\end{figure}
+
+\section{Math!}
+
+Let us look at some examples of mathematical formulas.
+\begin{itemize}
+	\item Create a matrix with \texttt{pmatrix}. The ``p'' stands for parenthesis. You also have
+	      \texttt{vmatrix} (for determinants) and \texttt{bmatrix} (vertical respectively
+	      brackets).
+	      \begin{equation*}
+		      \begin{pmatrix}
+			      5      & \alpha & \text{test} & 3 \\
+			      0      & \ddots &             & 0 \\
+			      \vdots &        &             & 0 \\
+			      0      & 1      & 1           & 5
+		      \end{pmatrix}
+		      \begin{vmatrix}
+			      5      & \alpha & \text{test} & 3 \\
+			      0      & \ddots &             & 0 \\
+			      \vdots &        &             & 0 \\
+			      0      & 1      & 1           & 5
+		      \end{vmatrix}
+		      \begin{bmatrix}
+			      5      & \alpha & \text{test} & 3 \\
+			      0      & \ddots &             & 0 \\
+			      \vdots &        &             & 0 \\
+			      0      & 1      & 1           & 5
+		      \end{bmatrix}
+	      \end{equation*}
+	\item The \texttt{align} environment allows you to align equations after each other:
+	      \begin{align*}
+		      |x_1+x_2+\dots +x_n|^2 & = |\sum_{i=1}^{n}x_i|^2      \\
+		                             & \leq (\sum_{i=1}^{n}|x_i|)^2 \\
+		                             & \leq \sum_{i=1}^n(x_i)^2
+	      \end{align*}
+	\item Writing out $\mathbb{R}$ can be tedious. Luckily we defined a ``macro'' to save us some
+	      time. Wow $\R$, so easy!
+	\item Sometimes your parenthesis look very small. Like here for example:
+	      \begin{equation*}
+		      x= (\frac{\sum_{i=0}^n x^i}{\sin \theta}).
+	      \end{equation*}
+	      You can use \textbackslash \texttt{left(} and \textbackslash \texttt{right)} for this:
+	      \begin{equation*}
+		      x= \left(\frac{\sum_{i=0}^n x^i}{\sin \theta}\right).
+	      \end{equation*}
+	\item Most mathematical symbols have a nice command:
+	      \begin{equation*}
+		      \alpha, \vartriangleleft, \subseteq, \int, \dots.
+	      \end{equation*}
+	      If you don't know the name of a command you can use \href{http://detexify.kirelabs.org/classify.html}{this website} to draw it, and it will let you know what the command is.
+\end{itemize}
+
+\begin{definition}
+	A \emph{monad} is a monoid in the category of endofunctors\footnote{This is definition actually makes sense, even though it is used jokingly}.
+\end{definition}
+\begin{remark}
+	I'm too lazy to explain what this means, but the relevant definitions can be found in any standard text book on category theory.
+\end{remark}
+
+% Follow the guidelines of your course for what style to use.
+\bibliographystyle{apalike}
+% Only papers you cite will appear.
+% Otherwise you can use \nocite{PaperRef}.
+\bibliography{refs.bib}
+
+\end{document}
