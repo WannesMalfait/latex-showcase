@@ -21,6 +21,7 @@
 % Easily change the enumeration type
 % WARNING: doesn't work with beamer!
 \usepackage[shortlabels]{enumitem}
+% For importing images.
 \usepackage{graphicx}
 
 % Theorem environments
@@ -54,6 +55,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
 
+
 % Information for the title page
 \title{A showcase of \LaTeX}
 \author{Wannes Malfait, Andreas Lorrain}
@@ -67,6 +69,8 @@
 \newpage
 
 \tableofcontents
+\listoffigures
+\listoftables
 \newpage
 
 \section{Introduction}
@@ -85,6 +89,10 @@ possible. Let us start with a theorem:
 	This follows as a trivial consequence of \cite[Theorem 6.9]{GeissLeclercSchroer2008PFvar}.
 \end{proof}
 
+\begin{lemma}
+	A lemma
+\end{lemma}
+
 You can then refer to \Cref{thm:pythagoras} like so, and \cref{eq:pythagoras} like so.
 You can even refer to things before you define them! Look at this beautiful image:
 \cref{fig:meme}.
@@ -96,6 +104,18 @@ You can even refer to things before you define them! Look at this beautiful imag
 	\caption{A very accurate meme.}
 	\label{fig:meme}
 \end{figure}
+
+\subsection{Tables}
+\begin{table}
+	\centering
+	\begin{tabular}{l|ccc}
+		    & color  & height & age \\
+		\hline
+		Dog & black  & 1.5 m  & 7   \\
+		Cat & orange & 30 cm  & 3
+	\end{tabular}
+	\caption{A table!}
+\end{table}
 
 \section{Math!}
 
